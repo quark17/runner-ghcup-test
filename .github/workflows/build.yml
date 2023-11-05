@@ -1,0 +1,20 @@
+name: CI
+
+# Trigger the workflow on push or pull request
+on: [ push, pull_request ]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ ubuntu-20.04, ubuntu-22.04, macos-11, macos-12, macos-13 ]
+    name: "Test: ${{ matrix.os }}"
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        shell: bash
+        run: |
+          ghcup install ghc 9.4.7
+          ghcup set ghc 9.4.7
+          ghc --version
