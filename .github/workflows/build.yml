@@ -20,3 +20,12 @@ jobs:
           ghcup set ghc 9.4.7
           ghc --version
           which -a ghc
+      - name: Put ghcup early in PATH
+        shell: bash
+        run: |
+          echo "$HOME/.ghcup/bin" >> $GITHUB_PATH
+      - name: Check ghc
+        shell: bash
+        run: |
+          which -a ghc
+          ghc --version
